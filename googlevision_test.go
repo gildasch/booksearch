@@ -12,14 +12,18 @@ func TestGoogleVision(t *testing.T) {
 	b, err := ioutil.ReadFile("test_image.jpg")
 	require.NoError(t, err)
 
-	_, err = GoogleVision(b)
+	name, short, description, err := GoogleVision(b)
 	require.NoError(t, err)
+
+	assert.Equal(t, "Logicomix", name)
+	assert.Equal(t, "Roman d'Apóstolos Doxiádis et Christos Papadimitriou", short)
+	assert.Equal(t, "Logicomix est un roman graphique sur la quête des fondements des mathématiques. Il est scénarisé par l'écrivain Apóstolos K. Doxiàdis et le professeur et chercheur en informatique théorique Christos H. Papadimitriou. ", description)
 }
 
 func TestEntity(t *testing.T) {
 	name, short, description, err := entity("/m/05q8g20")
-
 	require.NoError(t, err)
+
 	assert.Equal(t, "Logicomix", name)
 	assert.Equal(t, "Roman d'Apóstolos Doxiádis et Christos Papadimitriou", short)
 	assert.Equal(t, "Logicomix est un roman graphique sur la quête des fondements des mathématiques. Il est scénarisé par l'écrivain Apóstolos K. Doxiàdis et le professeur et chercheur en informatique théorique Christos H. Papadimitriou. ", description)
